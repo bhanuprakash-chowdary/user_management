@@ -189,24 +189,4 @@ public class UserService implements UserDao {
 		return resp;
 	}
 	
-	public User findByUsername(String username) {
-        String sql = "SELECT * FROM users WHERE user_name = ?";
-        List<User> users = jdbcTemplate.query(sql, (rs, rowNum) -> {
-            User user = new User();
-            user.setUserId(rs.getString("user_id"));
-            user.setUserName(rs.getString("user_name"));
-            user.setUserPassword(rs.getString("user_password"));
-            user.setUserEmail(rs.getString("user_email"));
-            user.setUserMobileNumber(rs.getString("user_mobile_number"));
-            user.setRoles(getUserRoles(rs.getInt("user_id")));
-            return user;
-        });
-        return users.isEmpty() ? null : users.get(0);
-    }
-
-    private Set<String> getUserRoles(int userId) {
-        String sql = "SELECT role_name FROM user_roles WHERE user_id = ?";
-        List<String> roles = jdbcTemplate.queryForList(sql,String.class,userId);
-        return new HashSet<>(roles);
-    }
 }

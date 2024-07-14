@@ -15,5 +15,4 @@ public interface UserDao {
 
 	public ResponseBean updateUserDetails(User user);
 
-	public User findByUsername(String username);
 }

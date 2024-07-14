@@ -22,14 +22,14 @@ public class JournalService {
     }
 
     private void saveJournal(String message) {
-        String sql = "INSERT INTO journals (event_message) VALUES (?)";
+        String sql = "insert into journals (event_message) values (?)";
         jdbcTemplate.update(sql, message);
     }
 
     public ResponseBean getJournals() {
         ResponseBean resp = new ResponseBean();
         try {
-            String sql = "SELECT * FROM journals";
+            String sql = "select * from journals";
             List<Journal> journals = jdbcTemplate.query(sql, (rs, rowNum) -> {
                 Journal journal = new Journal();
                 journal.setId(rs.getInt("id"));
@@ -50,7 +50,7 @@ public class JournalService {
 		ResponseBean resp = new ResponseBean();
 		try {
 
-			String sqlQuery = "SELECT * FROM journals where id=?";
+			String sqlQuery = "select * from journals where id=?";
 			Journal journals = jdbcTemplate.queryForObject(sqlQuery, (rs, rowNum) -> {
 				Journal journal = new Journal();
 				journal.setId(rs.getInt("id"));
